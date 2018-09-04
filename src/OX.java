@@ -1,29 +1,30 @@
 public class OX {
-    private String [][] table = {
-            {" ","0","1","2"},
-            {"0","-","-","-"},
-            {"1","-","-","-"},
-            {"2","-","-","-"},
+    public String player;
+    private String[][] table = {
+            {" " ,"0" ,"1" ,"2" },
+            {"0" ,"-" ,"-" ,"-" },
+            {"1" ,"-" ,"-" ,"-" },
+            {"2" ,"-" ,"-" ,"-" },
     };
 
-    private String player;
-    private int countX;
-    private int countO;
-    private int countdraw;
-    private int turncount;
+
+    private int turnCount;
+    private int scoreX;
+    private int scoreO;
+    private int scoreDraw;
 
     public OX(){
         player = "X";
-        countX = 0;
-        countO = 0;
-        countdraw = 0;
-        turncount = 0;
+        turnCount = 0;
+        scoreX = 0;
+        scoreO = 0;
+        scoreDraw =0;
     }
 
     public String getTableString() {
         String result = "";
-        for(int row =0; row < table.length;row++){
-            for(int col=0; col <table[row].length; col++){
+        for(int row=0 ; row<table.length ; row++ ){
+            for(int col=0 ; col<table[row].length ; col++ ){
                 result = result + table[row][col];
             }
             result = result + "\n";
@@ -35,50 +36,42 @@ public class OX {
         return player;
     }
 
-    public int getcountO() {
-
-        return countO;
-    }
-
-    public int getcountX() {
-
-        return countX;
-    }
-
-    public int getcountdraw() {
-        return countdraw;
-    }
-
-    public boolean put(int col, int row) {
+    public boolean put(int row, int col) {
         try {
-            if(!table[row+1][col+1].equals("-")){
+            if (!table[row + 1][col + 1].equals("-")) {
                 return false;
-            }else{
-            table[row+1][col+1] = getCurrentPlayer();
-            turncount++;
-            if (Checkwin(row,col)){
-                if (player.equals("X")){
-                    countX++;
-                }else if (player.equals("O")){
-                    countO++;
+            } else {
+                table[row + 1][col + 1] = getCurrentPlayer();
+                turnCount++;
+                if(checkWin(row,col)){
+                    if(player.equals("X")){
+                        scoreX++;
+                    }else if(player.equals("O")){
+                        scoreO++;
+                    }
                 }
+                if(isDraw()){
+                    scoreDraw++;
+                }
+                return true;
             }
-                }
         }catch (Exception ex){
             return false;
         }
-        return true;
+
     }
 
-    public void Switchplayer() {
-        if(player == "X"){
+    public void switchPlayer() {
+        OX ox = new OX();
+        if(player.equals("X")) {
             player = "O";
         }else{
             player = "X";
         }
     }
 
-    public boolean Checkwin(int col, int row) {
+    public boolean checkWin(int row, int col) {
+
         boolean rowWin = true;
         for(int i=0;i<3;i++){
             if(!table[row+1][i+1].equals(player)){
@@ -121,6 +114,7 @@ public class OX {
 
         return false;
     }
+
     public void reset() {
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
@@ -128,36 +122,30 @@ public class OX {
             }
         }
         player = "X";
-        turncount = 0;
+        turnCount = 0;
     }
 
-    public String get(int col, int row) {
-        if(col > 2 || col < 0 || row > 2 || row < 0){
-            return null;
-        }
-        return table[row+1][col+1];
-    }
+    public int getTurnCount() {
 
-    public int getTurncount() {
-        return turncount;
+        return turnCount;
     }
 
     public boolean isDraw() {
-        if (turncount < 9){
+        if(turnCount < 9){
             return false;
         }
         return true;
     }
 
-    public int getAtscoreX() {
-        return countX;
+    public int getScoreX() {
+        return scoreX;
     }
 
-    public int getAtscoreO() {
-        return countO;
+    public int getScoreO() {
+        return scoreO;
     }
 
-    public int getAtscoreDraw() {
-        return countdraw;
+    public int getScoreDraw() {
+        return scoreDraw;
     }
 }
