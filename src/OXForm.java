@@ -165,9 +165,9 @@ public class OXForm {
             button7.setText(ox.get(0,2));
             button8.setText(ox.get(1,2));
             button9.setText(ox.get(2,2));
-            lblscoreX.setText("Score X : " + ox.getScoreX());
-            lblscoreO.setText("Score O : " + ox.getScoreO());
-            lblscoreDraw.setText("Score Draw : " + ox.getScoreDraw());
+            lblscoreX.setText("X : " + ox.getScoreX());
+            lblscoreO.setText("O : " + ox.getScoreO());
+            lblscoreDraw.setText("Draw : " + ox.getScoreDraw());
     }
 
     public static void main(String[] args) {
